@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'webstore.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':  'webstore2020',
+        'USER': 'webstore2020_user',
+        'PASSWORD': 'salasona',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 

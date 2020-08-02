@@ -17,3 +17,19 @@ def details_view(request):
 
 def contact_view(request):
     return render(request, 'contact.html', {})
+
+
+def login_view(request):
+    return render(request, 'login.html', {})
+
+
+def cart_view(request):
+    return render(request, 'cart.html', {})
+
+
+def checkout_view(request):
+    return render(request, 'checkout.html', {})
+
+
+def confirmation_view(request):
+    return render(request, 'confirmation.html', {})

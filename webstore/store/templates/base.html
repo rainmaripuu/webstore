@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Melting Skull</title>
+    <title>Melting Skull{% block title %}{% endblock %}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -53,20 +53,20 @@
                                 <ul id="navigation">
                                     <li><a href="index.html">Home</a></li>
                                     <li><a href="shop.html">shop</a></li>
-                                    <li><a href="about.html">about</a></li>
-                                    <li class="hot"><a href="#">Latest</a>
+{% comment %}                                    <li><a href="about.html">about</a></li>{% endcomment %}
+{% comment %}                                    <li class="hot"><a href="#">Latest</a>
                                         <ul class="submenu">
                                             <li><a href="shop.html"> Product list</a></li>
                                             <li><a href="product_details.html"> Product Details</a></li>
                                         </ul>
-                                    </li>
-                                    <li><a href="blog.html">Blog</a>
+                                    </li>{% endcomment %}
+{% comment %}                                    <li><a href="blog.html">Blog</a>
                                         <ul class="submenu">
                                             <li><a href="blog.html">Blog</a></li>
                                             <li><a href="blog-details.html">Blog Details</a></li>
                                         </ul>
-                                    </li>
-                                    <li><a href="#">Pages</a>
+                                    </li>{% endcomment %}
+{% comment %}                                    <li><a href="#">Pages</a>
                                         <ul class="submenu">
                                             <li><a href="login.html">Login</a></li>
                                             <li><a href="cart.html">Cart</a></li>
@@ -74,7 +74,7 @@
                                             <li><a href="confirmation.html">Confirmation</a></li>
                                             <li><a href="checkout.html">Product Checkout</a></li>
                                         </ul>
-                                    </li>
+                                    </li>{% endcomment %}
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
                             </nav>
@@ -120,7 +120,7 @@
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
-                                        <p>Asorem ipsum adipolor sdit amet, consectetur adipisicing elitcf sed do eiusmod tem.</p>
+                                        <p>Every shirt needs a little skull. Get yours here!</p>
                                 </div>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                                     <li><a href="#">About</a></li>
                                     <li><a href="#"> Offers & Discounts</a></li>
                                     <li><a href="#"> Get Coupon</a></li>
-                                    <li><a href="#">  Contact Us</a></li>
+                                    <li><a href="contact.html">  Contact Us</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -175,7 +175,7 @@
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                         </div>
                     </div>
-                    <div class="col-xl-5 col-lg-4 col-md-5">
+{% comment %}                    <div class="col-xl-5 col-lg-4 col-md-5">
                         <div class="footer-copy-right f-right">
                             <!-- social -->
                             <div class="footer-social">
@@ -185,7 +185,7 @@
                                 <a href="#"><i class="fas fa-globe"></i></a>
                             </div>
                         </div>
-                    </div>
+                    </div>{% endcomment %}
                 </div>
             </div>
         </div>
