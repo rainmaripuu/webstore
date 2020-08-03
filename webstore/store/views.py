@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Product, Category
 
 # Create your views here.
 
@@ -8,7 +9,9 @@ def home_view(request):
 
 
 def shop_view(request):
-    return render(request, 'shop.html', {})
+    item = Product.objects.all()
+    context = {'products': item}
+    return render(request, 'shop.html', context)
 
 
 def details_view(request):
