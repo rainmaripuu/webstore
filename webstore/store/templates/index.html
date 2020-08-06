@@ -67,39 +67,19 @@
                     </div>
                 </div>
                 <div class="row">
+                    {% for product in newest %}
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-new-pro mb-30 text-center">
                             <div class="product-img">
-                                <img src="{% static 'webstore/assets/img/gallery/ms_arctic/ms_arctic_mockup_Front_Mens_Light-Blue.png' %}" alt="">
+                                <img src="{{ product.img.url }}" width="361" height="380">
                             </div>
                             <div class="product-caption">
-                                <h3><a href="product_details.html">Melting Skull Arctic T-Shirt</a></h3>
-                                <span>EUR 25</span>
+                                <h3><a href="{% url 'product_details' product.id %}">{{ product.name }}</a></h3>
+                                <span>{{ product.price}} EUR</span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-new-pro mb-30 text-center">
-                            <div class="product-img">
-                                <img src="{% static 'webstore/assets/img/gallery/ms_rouge/ms_rouge_mockup_Front_Womens-4_Heather-Prism-Lilac.png' %}" alt="">
-                            </div>
-                            <div class="product-caption">
-                                <h3><a href="product_details.html">Melting Skull Rouge T-Shirt</a></h3>
-                                <span>EUR 25</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-new-pro mb-30 text-center">
-                            <div class="product-img">
-                                <img src="{% static 'webstore/assets/img/gallery/ms_sunscreen/ms_sunscreen_mockup_Front_Mens_Army.png' %}" alt="">
-                            </div>
-                            <div class="product-caption">
-                                <h3><a href="product_details.html">Melting Skull Sunscreen T-Shirt</a></h3>
-                                <span>EUR 25</span>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </section>

@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from .models import Product, Category
+from django.views.generic import DetailView
 
 # Create your views here.
 
 
 def home_view(request):
-    return render(request, 'index.html', {})
+    newest = Product.objects.order_by('-added_date')
+    context = {'newest': newest[0:3]}
+    return render(request, 'index.html', context)
 
 
 def shop_view(request):
@@ -18,8 +21,14 @@ def shop_view(request):
     return render(request, 'shop.html', context)
 
 
-def details_view(request):
-    return render(request, 'product_details.html', {})
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'product_details.html'
+    context_object_name = 'product'
+
+
+# def details_view(request):
+#     return render(request, 'product_details.html', {})
 
 
 def contact_view(request):
