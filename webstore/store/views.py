@@ -10,7 +10,11 @@ def home_view(request):
 
 def shop_view(request):
     item = Product.objects.all()
-    context = {'products': item}
+    newest = Product.objects.order_by('-added_date')
+    price_high_low = Product.objects.order_by('-price')
+    price_low_high = Product.objects.order_by('price')
+    context = {'products': item, 'newest': newest, 'price_high_low': price_high_low, 'price_low_high': price_low_high}
+
     return render(request, 'shop.html', context)
 
 
