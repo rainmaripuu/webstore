@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from store.constants import COUNTRIES
 import os
 
 # Create your models here.
@@ -34,14 +35,28 @@ class Product(models.Model):
 
 
 class StoreUser(AbstractUser):
-    pass
+    COMMUNICATION_CHOICES = [('email', 'Email'), ('sms', 'SMS')]
+    country = models.CharField(max_length=50, null=True, blank=True, choices=COUNTRIES)
+    city = models.CharField(max_length=50, null=True, blank=True)
+    county = models.CharField(max_length=50, null=True, blank=True)
+    street = models.CharField(max_length=50, null=True, blank=True)
+    preferred_communication = models.CharField(max_length=50, null=True, blank=True, choices=COMMUNICATION_CHOICES)
 
 '''
-class Cart(models.Model):
-    user = ?
-    product = models.ManyToManyField(Product)
-    
-    
-cart = Cart()
-total_products_in_cart = cart.products.objects.all.count()
+class CartItem(models.Model): #trackib mitu itemit on korvis
+    product = models.ForeignKey(
+        Product, on_delete=models.DO_NOTHING)
+    quantity = models.PositiveIntegerField(default=1)
 '''
+
+
+class Cart(models.Model):
+    user = models.ForeignKey(
+        StoreUser, on_delete=models.DO_NOTHING)
+    active = models.BooleanField(default=True) #kui sooritab ostu, siis peaks muutma active-i Falseks
+    product = models.ManyToManyField(Product)
+
+    
+
+# cart = Cart()
+# total_products_in_cart = cart.products.objects.all.count()

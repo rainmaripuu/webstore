@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Product, Category
-from django.views.generic import DetailView
+from .models import Product, Category, Cart
+from django.views.generic import DetailView, ListView
 
 # Create your views here.
 
@@ -44,6 +44,32 @@ class ProductDetailView(DetailView):
     context_object_name = 'product'
 
 
+class CartView(ListView):
+    model = Product
+    template_name = 'cart.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        user = self.request.user
+        cart = Cart.objects.filter(user=user).filter(active=True).first()
+        if cart == None:
+            self.products = []
+        else:
+            self.products = cart.products.all()
+        return self.products
+
+    def get_context_data(self, **kwargs):
+        context = super(CartView, self).get_context_data(**kwargs)
+        total = 0
+
+        # if len(self.products) == 0:
+        #     context('no_products') = True
+
+        for p in self.products:
+            total += p.price
+        context['total'] = total
+        return context
+
 # def details_view(request):
 #     return render(request, 'product_details.html', {})
 
@@ -56,8 +82,8 @@ def login_view(request):
     return render(request, 'login.html', {})
 
 
-def cart_view(request):
-    return render(request, 'cart.html', {})
+# def cart_view(request):
+#     return render(request, 'cart.html', {})
 
 
 def checkout_view(request):
