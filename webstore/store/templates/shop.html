@@ -29,9 +29,14 @@
                         <!--Nav Button  -->
                         <nav>                                                      
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" name="newest" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Newest Arrivals</a>
-                                <a class="nav-item nav-link" name="price_high_low" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"> Price high to low</a>
-                                <a class="nav-item nav-link" name="price_low_high" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"> Price low to high </a>
+{#                                <a class="nav-item nav-link {% if orderby == 'newest' %} active {% endif %}" name="newest" id="nav-home-tab" data-toggle="tab" href="#newest" role="tab" aria-controls="nav-home" aria-selected="{% if orderby == 'newest' %} 'true' {% else %} 'false' {% endif %}"> Newest Arrivals</a>#}
+{% comment %}                                <a class="nav-item nav-link {% if orderby == 'newest' %} active {% endif %}" name="newest" id="nav-home-tab" data-toggle="tab" href="{% url 'shop' %}?orderby=newest" role="tab" aria-controls="nav-home" aria-selected="{% if orderby == 'newest' %} true {% else %} false {% endif %}">Newest Arrivals</a>
+                                <a class="nav-item nav-link {% if orderby == 'price_high_low' %} active {% endif %}" name="price_high_low" id="nav-profile-tab" data-toggle="tab" href="{% url 'shop' %}?orderby=price_high_low" role="tab" aria-controls="nav-profile" aria-selected="{% if orderby == 'price_high_low' %} true {% else %} false {% endif %}">Price high to low</a>
+                                <a class="nav-item nav-link {% if orderby == 'price_low_high' %} active {% endif %}" name="price_low_high" id="nav-contact-tab" data-toggle="tab" href="{% url 'shop' %}?orderby=price_low_high" role="tab" aria-controls="nav-contact" aria-selected="{% if orderby == 'price_low_high' %} true {% else %} false {% endif %}">Price low to high </a>
+                            {% endcomment %}
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">NewestArrivals</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"> Price High to Low</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"> Price Low to High </a>
                             </div>
                         </nav>
                         <!--End Nav Button  -->
@@ -56,79 +61,49 @@
                 <!-- Nav Card -->
                 <div class="tab-content" id="nav-tabContent">
                     <!-- card one -->
-                          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                <div class="row">
-                                    {% for product in newest %}
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                            <div class="single-popular-items mb-50 text-center">
-                                                <div class="popular-img">
-                                                    <img src="{{ product.img.url }}" width="361" height="380">
-                                                    <div class="img-cap">
-                                                        <span>Add to cart</span>
-                                                    </div>
-                                                    <div class="favorit-items">
-                                                        <span class="flaticon-heart"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="popular-caption">
-                                                    <h3><a href="{% url 'product_details' product.id %}">{{ product.name }}</a></h3>
-                                                    <span>{{ product.price}} EUR</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
+{% comment %}                    {% if orderby == 'newest' %}
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"></div>
+                     {% else %}
+                        <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"></div>
+                    {% endif %}
+                        {% include 'product_tab.html' with products=newest %}
+                    </div>
+
+
+                    {% if orderby == 'price_high_low' %}
+                        <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"></div>
+                        {% else %}
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"></div>
+                    {% endif %}
+                        {% include 'product_tab.html' with products=price_high_low %}
+                    </div>
+
+                    {% if orderby == 'price_low_high' %}
+                        <div class="tab-pane fade show active" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"></div>
+                    {% else %}
+                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"></div>
+                    {% endif %}
+                        {% include 'product_tab.html' with products=price_low_high %}
+                    </div>{% endcomment %}
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="row">
+                        {% include 'product_tab.html' with products=newest %}
+                        </div>
+                    </div>
 
                     <!-- Card two -->
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                         <div class="row">
-                            {% for product in price_high_low %}
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                    <div class="single-popular-items mb-50 text-center">
-                                        <div class="popular-img">
-                                            <img src="{{ product.img.url }}" width="361" height="380">
-                                            <div class="img-cap">
-                                                <span>Add to cart</span>
-                                            </div>
-                                            <div class="favorit-items">
-                                                <span class="flaticon-heart"></span>
-                                            </div>
-                                        </div>
-                                        <div class="popular-caption">
-                                            <h3><a href="product_details.html">{{ product.name }}</a></h3>
-                                            <span>{{ product.price}} EUR</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
+                        {% include 'product_tab.html' with products=price_high_low %}
                         </div>
                     </div>
+
                     <!-- Card three -->
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                         <div class="row">
-                            {% for product in price_low_high %}
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                    <div class="single-popular-items mb-50 text-center">
-                                        <div class="popular-img">
-                                            <img src="{{ product.img.url }}" width="361" height="380">
-                                            <div class="img-cap">
-                                                <span>Add to cart</span>
-                                            </div>
-                                            <div class="favorit-items">
-                                                <span class="flaticon-heart"></span>
-                                            </div>
-                                        </div>
-                                        <div class="popular-caption">
-                                            <h3><a href="product_details.html">{{ product.name }}</a></h3>
-                                            <span>{{ product.price}} EUR</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
+                        {% include 'product_tab.html' with products=price_low_high %}
                         </div>
-
-                </div>
+                    </div>
                 <!-- End Nav Card -->
             </div>
         </section>
