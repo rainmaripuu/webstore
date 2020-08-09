@@ -1,0 +1,26 @@
+
+                    <!-- card one -->
+                          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <div class="row">
+                                    {% for product in products %}
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                            <div class="single-popular-items mb-50 text-center">
+                                                <div class="popular-img">
+                                                    <img src="{{ product.img.url }}" width="361" height="380">
+                                                    <div class="img-cap">
+                                                        <span>Add to cart</span>
+                                                    </div>i
+                                                    <div class="favorit-items">
+                                                        <span class="flaticon-heart"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="popular-caption">
+                                                    <h3><a href="{% url 'product_details' product.id %}">{{ product.name }}</a></h3>
+                                                    <span>{{ product.price}} EUR</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
