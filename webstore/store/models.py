@@ -10,6 +10,12 @@ import os
 def get_image_path(instance, filename):
     return os.path.join('products', str(instance.id), filename)
 
+# def get_image_path(self):
+#     if self.photo and hasattr(self.photo, 'url'):
+#         return self.photo.url
+#     else:
+#         return "/media/products/spade_melting_skull.jpg"
+
 
 # class Category(models.Model):
 #     class Meta:
@@ -56,8 +62,8 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     info = models.TextField(null=True, blank=True)
     added_date = models.DateField(auto_now_add=True)
-    category = TreeForeignKey('Category',null=True,blank=True, on_delete=models.DO_NOTHING)
-    img = models.ImageField(upload_to=get_image_path, blank=True, null=True)
+    category = TreeForeignKey('Category', null=True, blank=True, on_delete=models.DO_NOTHING)
+    img = models.ImageField(upload_to=get_image_path, default="/media/products/spade_melting_skull.jpg", blank=True, null=True)
     slug = models.SlugField()
 
     def __str__(self):

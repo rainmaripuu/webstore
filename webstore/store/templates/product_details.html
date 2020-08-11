@@ -61,6 +61,9 @@
                 </div>
             </div>
             </div>
+            <a href="{% url 'list' %}" class="btn hero-btn">LIST</a>
+            <a href="{% url 'update' product.id %}" class="btn hero-btn">UPDATE</a>
+            <a href="{% url 'delete' product.id %}" class="btn hero-btn">DELETE</a>
         </div>
         <!--================End Single Product Area =================-->
 {% comment %}        <!-- subscribe part here -->

@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import Product, Category, Cart
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -72,6 +74,35 @@ class CartView(ListView):
 
 # def details_view(request):
 #     return render(request, 'product_details.html', {})
+
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'list.html'
+    context_object_name = 'products'
+
+
+class CreateProductView(LoginRequiredMixin, CreateView):
+    model = Product
+    template_name = 'create.html'
+    fields = '__all__'
+    success_url = reverse_lazy('list')
+
+
+class UpdateProductView(LoginRequiredMixin, UpdateView):
+    model = Product
+    template_name = 'update.html'
+    context_object_name = 'product'
+    fields = '__all__'
+    success_url = reverse_lazy('list')
+
+
+class DeleteProductView(PermissionRequiredMixin, DeleteView):
+    permission_required = ['products.delete_product', ]
+    model = Product
+    template_name = 'delete.html'
+    context_object_name = 'product'
+    success_url = reverse_lazy('list')
 
 
 def contact_view(request):

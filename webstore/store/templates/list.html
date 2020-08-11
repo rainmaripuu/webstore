@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    | List
+{% endblock %}
+{% block content %}
+<table class="table">
+    <tr>
+{#        <th>ID</th>#}
+        <th>Preview</th>
+        <th>Name</th>
+        <th>Color</th>
+        <th>Price</th>
+        <th>Quantity</th>
+    </tr>
+
+    {% for product in products %}
+    <tr>
+
+{#        <td ><a href="{% url 'product_details' product.id %}" class="btn hero-btn">{{product.id}}</a></td>#}
+        <td><a href="{% url 'product_details' product.id %}"> <img class="img-thumbnail" src="{{ product.img.url }}" width="50" height="50" alt="img"></a></td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.color }}</td>
+        <td>{{ product.price | default_if_none:"--"}}</td>
+        <td>{{ product.quantity }}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+<hr>
+
+<a href="{% url 'create'%}" class="btn hero-btn"> Create a new product</a>
+
+{% endblock %}
