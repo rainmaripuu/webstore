@@ -4,32 +4,39 @@
     | List
 {% endblock %}
 {% block content %}
-<table class="table">
-    <tr>
-{#        <th>ID</th>#}
-        <th>Preview</th>
-        <th>Name</th>
-        <th>Color</th>
-        <th>Price</th>
-        <th>Quantity</th>
-    </tr>
+    <style>
+        img:hover {
+            box-shadow: 0 0 2px 1px rgba(255, 0, 0, 0.5);
+        }
+    </style>
 
-    {% for product in products %}
-    <tr>
+    <table class="table">
+        <tr>
+            {#        <th>ID</th>#}
+            <th>Preview</th>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
 
-{#        <td ><a href="{% url 'product_details' product.id %}" class="btn hero-btn">{{product.id}}</a></td>#}
-        <td><a href="{% url 'product_details' product.id %}"> <img class="img-thumbnail" src="{{ product.img.url }}" width="50" height="50" alt="img"></a></td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.color }}</td>
-        <td>{{ product.price | default_if_none:"--"}}</td>
-        <td>{{ product.quantity }}</td>
+        {% for product in products %}
+            <tr>
+                {#        <td ><a href="{% url 'product_details' product.id %}" class="btn hero-btn">{{product.id}}</a></td>#}
+                <td>
+                    <a href="{% url 'product_details' product.id %}"> <img class="img-thumbnail" src="{{ product.img.url }}" width="50" height="50" alt="img"></a>
+                </td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.color }}</td>
+                <td>{{ product.price | default_if_none:"--"}}</td>
+                <td>{{ product.quantity }}</td>
 
-    </tr>
-    {% endfor %}
-</table>
+            </tr>
+        {% endfor %}
+    </table>
 
-<hr>
+    <hr>
 
-<a href="{% url 'create'%}" class="btn hero-btn"> Create a new product</a>
+    <a href="{% url 'create'%}" class="btn hero-btn"> Create a new product</a>
 
 {% endblock %}
