@@ -22,6 +22,20 @@
         </div>
         <!-- Hero Area End-->
         <!--================login_part Area =================-->
+        <!-- Hero Area End-->
+        <!--================login_part Area =================-->
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+        {% else %}
+            <p>Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
         <section class="login_part section_padding ">
             <div class="container">
                 <div class="row align-items-center">
@@ -40,24 +54,25 @@
                             <div class="login_part_form_iner">
                                 <h3>Welcome Back ! <br>
                                     Please Sign in now</h3>
-                                <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                                <form class="row contact_form" action="{% url 'login' %}" method="post">
+                                    {% csrf_token %}
                                     <div class="col-md-12 form-group p_star">
-                                        <input type="text" class="form-control" id="name" name="name" value=""
-                                            placeholder="Username">
+                                        {{ form.username.label_tag }}
+                                        {{ form.username }}
                                     </div>
                                     <div class="col-md-12 form-group p_star">
-                                        <input type="password" class="form-control" id="password" name="password" value=""
-                                            placeholder="Password">
+                                        {{ form.password.label_tag }}
+                                        {{ form.password }}
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <div class="creat_account d-flex align-items-center">
-                                            <input type="checkbox" id="f-option" name="selector">
-                                            <label for="f-option">Remember me</label>
+{#                                            <input type="checkbox" id="f-option" name="selector">#}
+{#                                            <label for="f-option">Remember me</label>#}
                                         </div>
-                                        <button type="submit" value="submit" class="btn_3">
+                                        <button type="submit" name="next" value="{{ next }}" class="btn_3">
                                             log in
                                         </button>
-                                        <a class="lost_pass" href="#">forget password?</a>
+                                        <a class="lost_pass" href="{% url 'password_reset' %}">forget password?</a>
                                     </div>
                                 </form>
                             </div>
@@ -66,6 +81,11 @@
                 </div>
             </div>
         </section>
+        <!--================login_part end =================-->
+
+
+
+
         <!--================login_part end =================-->
     </main>
 {% endblock %}

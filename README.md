@@ -7,6 +7,7 @@ Project requires the following libraries:
 - django (`pip install django`)
 - mysqlclient (`pip install mysqlclient`)
 - pillow (`pip install Pillow`)
+- django-mptt (`pip install django-mptt`)
 
 To run the project (`python manage.py runserver`)
 

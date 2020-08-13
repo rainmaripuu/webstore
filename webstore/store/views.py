@@ -3,6 +3,7 @@ from .models import Product, Category, Cart
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -109,10 +110,13 @@ def contact_view(request):
     return render(request, 'contact.html', {})
 
 
-def login_view(request):
-    return render(request, 'login.html', {})
+# def login_view(request):
+#     return render(request, 'login.html', {})
 
 
+@login_required
+def admin_view(request):
+    return render(request, 'admin.html', {})
 # def cart_view(request):
 #     return render(request, 'cart.html', {})
 
