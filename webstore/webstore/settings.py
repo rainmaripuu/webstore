@@ -136,3 +136,5 @@ STATICFILES_DIRS = [
 AUTH_USER_MODEL = 'store.StoreUser'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'home'

@@ -5,8 +5,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-#from django.contrib.auth import login, authenticate
-#from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
 
 
@@ -119,7 +117,6 @@ def signup(request):
             raw_password = form.cleaned_data.get('password')
             new_user = StoreUser.objects.create_user(username=username, password=raw_password)
             new_user.save()
-#            login(request, user)
             return HttpResponseRedirect(reverse_lazy('login'))
     else:
         form = SignUpForm()
@@ -128,10 +125,6 @@ def signup(request):
 
 def contact_view(request):
     return render(request, 'contact.html', {})
-
-
-# def login_view(request):
-#     return render(request, 'login.html', {})
 
 
 @login_required
