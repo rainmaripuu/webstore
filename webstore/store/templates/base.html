@@ -25,65 +25,69 @@
 </head>
 
 <body>
-    <!--? Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="{% static 'webstore/assets/img/logo/mslogo.png' %}" alt="">
-                </div>
+<!--? Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="{% static 'webstore/assets/img/logo/mslogo.png' %}" alt="">
             </div>
         </div>
     </div>
-    <!-- Preloader Start -->
-    <header>
-        <!-- Header Start -->
-        <div class="header-area">
-            <div class="main-header header-sticky">
-                <div class="container-fluid">
-                    <div class="menu-wrapper">
-                        <!-- Logo -->
-                        <div class="logo">
-                            <a href="{% url 'home' %}"><img src="{% static 'webstore/assets/img/logo/mslogo_tekst.png' %}" alt=""></a>
-                        </div>
-                        <!-- Main-menu -->
-                        <div class="main-menu d-none d-lg-block">
-                            <nav>
-                                <ul id="navigation">
-                                    <li><a href="{% url 'home' %}">Home</a></li>
-                                    <li><a href="{% url 'shop' %}">Shop</a></li>
-                                    <li><a href="{% url 'contact' %}">Contact</a></li>
-                                     {% if user.is_authenticated %}
+</div>
+<!-- Preloader Start -->
+<header>
+    <!-- Header Start -->
+    <div class="header-area">
+        <div class="main-header header-sticky">
+            <div class="container-fluid">
+                <div class="menu-wrapper">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="{% url 'home' %}"><img src="{% static 'webstore/assets/img/logo/mslogo_tekst.png' %}" alt=""></a>
+                    </div>
+                    <!-- Main-menu -->
+                    <div class="main-menu d-none d-lg-block">
+                        <nav>
+                            <ul id="navigation">
+                                <li><a href="{% url 'home' %}">Home</a></li>
+                                <li><a href="{% url 'shop' %}">Shop</a></li>
+                                <li><a href="{% url 'contact' %}">Contact</a></li>
+                                {% if user.is_authenticated %}
                                     <li><a href="{% url 'admin' %}">Admin</a>
-                                        <ul class="submenu">
-                                            <li><a href="list.html"> Product list</a></li>
-                                            <li><a href="create.html"> Add Product</a></li>
-                                        </ul>
-                                    {% endif %}
-                                </ul>
-                            </nav>
-                        </div>
-                        <!-- Header Right -->
-                        <div class="header-right">
+                                    <ul class="submenu">
+                                        <li><a href="list.html"> Product list</a></li>
+                                        <li><a href="create.html"> Add Product</a></li>
+                                    </ul>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- Header Right -->
+                    <div class="header-right">
                         <div class="main-menu d-none d-lg-block">
                             <ul id="navigation">
-                            <nav>
-                                <li>
-                                    <div class="nav-search search-switch">
-                                        <span class="flaticon-search"></span>
-                                    </div>
-                                </li>
-                                {% if user.is_authenticated %}
-                                    <li><a href="{% url 'logout' %}?next={{ request.path }}" > logout {{ user.get_username }} </a></li>
-                                    <li><a href="{% url 'cart' %}"><span class="flaticon-shopping-cart"></span></a> </li>
+                                <nav>
+                                    <li>
+                                        <div class="nav-search search-switch">
+                                            <span class="flaticon-search"></span>
+                                        </div>
+                                    </li>
+                                    {% if user.is_authenticated %}
+                                        <li><a href="#"> {{ user.get_username }} </a>
+                                            <ul class="submenu">
+                                                <li><a href="#" > profile </a></li>
+                                                <li><a href="{% url 'logout' %}?next={% url 'home' %}" > logout </a></li>
+                                            </ul>
+                                        <li><a href="{% url 'cart' %}"><span class="flaticon-shopping-cart"></span></a> </li>
                                     {% else %}
-                                    <li><a href="{% url 'login' %}?next={{ request.path }}"><span class="flaticon-user"></span></a></li>
+                                        <li><a href="{% url 'login' %}?next={{ request.path }}"><span class="flaticon-user"></span></a></li>
                                     {% endif %}
 
 
-{#                                <li> <a href="{% url 'login' %}"><span class="flaticon-user"></span></a></li>#}
-{#                                <li><a href="{% url 'cart' %}"><span class="flaticon-shopping-cart"></span></a> </li>#}
+                                    {#                                <li> <a href="{% url 'login' %}"><span class="flaticon-user"></span></a></li>#}
+                                    {#                                <li><a href="{% url 'cart' %}"><span class="flaticon-shopping-cart"></span></a> </li>#}
                                 </nav>
                             </ul>
                         </div>
@@ -96,83 +100,83 @@
             </div>
         </div>
         <!-- Header End -->
-    </header>
+</header>
 
-    {% block content %}
+{% block content %}
 
-    {% endblock %}
+{% endblock %}
 
-    <footer>
-        <!-- Footer Start-->
-        <div class="footer-area footer-padding">
-            <div class="container">
-                <div class="row d-flex justify-content-between">
-                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="single-footer-caption mb-30">
-                                <!-- logo -->
-                                <div class="footer-logo">
-                                    <a href="index.html"><img src="{% static 'webstore/assets/img/logo/mslogo_tekst.png' %}" alt=""></a>
-                                </div>
-                                <div class="footer-tittle">
-                                    <div class="footer-pera">
-                                        <p>Every shirt needs a little skull. Get yours here!</p>
-                                </div>
-                                </div>
+<footer>
+    <!-- Footer Start-->
+    <div class="footer-area footer-padding">
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                    <div class="single-footer-caption mb-50">
+                        <div class="single-footer-caption mb-30">
+                            <!-- logo -->
+                            <div class="footer-logo">
+                                <a href="index.html"><img src="{% static 'webstore/assets/img/logo/mslogo_tekst.png' %}" alt=""></a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
-                        <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
-                                <h4>Quick Links</h4>
-                                <ul>
-                                    <li><a href="#">About</a></li>
-{% comment %}                                    <li><a href="#"> Offers & Discounts</a></li>
-                                    <li><a href="#"> Get Coupon</a></li>{% endcomment %}
-                                    <li><a href="contact.html">  Contact Us</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>New Products</h4>
-                                <ul>
-                                    <li><a href="#">T-Shirts</a></li>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                {% if user.is_authenticated %}
-                                <h4>Weather in {{ user.city }}</h4>
-                                <ul>
-                                    <li><a class="weatherwidget-io" href="https://forecast7.com/en/59d4424d75/tallinn/" data-label_1="TALLINN" data-font="Ubuntu" data-icons="Climacons Animated" data-days="3" data-theme="clear" >TALLINN</a>
-                                    <script>
-                                    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-                                    </script>
-                                    </li>
-                                </ul>
-                                {% endif %}
+                                <div class="footer-pera">
+                                    <p>Every shirt needs a little skull. Get yours here!</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Footer bottom -->
-                <div class="row align-items-center">
-                    <div class="col-xl-7 col-lg-8 col-md-7">
-                        <div class="footer-copy-right">
-                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-tittle">
+                            <h4>Quick Links</h4>
+                            <ul>
+                                <li><a href="#">About</a></li>
+                                {% comment %}                                    <li><a href="#"> Offers & Discounts</a></li>
+                                    <li><a href="#"> Get Coupon</a></li>{% endcomment %}
+                                <li><a href="contact.html">  Contact Us</a></li>
+                            </ul>
                         </div>
                     </div>
-{% comment %}                    <div class="col-xl-5 col-lg-4 col-md-5">
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-tittle">
+                            <h4>New Products</h4>
+                            <ul>
+                                <li><a href="#">T-Shirts</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-tittle">
+                            {% if user.is_authenticated %}
+                                <h4>Weather in {{ user.city }}</h4>
+                                <ul>
+                                    <li><a class="weatherwidget-io" href="https://forecast7.com/en/59d4424d75/tallinn/" data-label_1="TALLINN" data-font="Ubuntu" data-icons="Climacons Animated" data-days="3" data-theme="clear" >TALLINN</a>
+                                        <script>
+                                            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                                        </script>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer bottom -->
+            <div class="row align-items-center">
+                <div class="col-xl-7 col-lg-8 col-md-7">
+                    <div class="footer-copy-right">
+                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                </div>
+                {% comment %}                    <div class="col-xl-5 col-lg-4 col-md-5">
                         <div class="footer-copy-right f-right">
                             <!-- social -->
                             <div class="footer-social">
@@ -183,56 +187,56 @@
                             </div>
                         </div>
                     </div>{% endcomment %}
-                </div>
             </div>
         </div>
-        <!-- Footer End-->
-    </footer>
-    <!--? Search model Begin -->
-    <div class="search-model-box">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-btn">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Searching key....." name="filter">
-            </form>
-        </div>
     </div>
-    <!-- Search model end -->
+    <!-- Footer End-->
+</footer>
+<!--? Search model Begin -->
+<div class="search-model-box">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-btn">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Searching key....." name="filter">
+        </form>
+    </div>
+</div>
+<!-- Search model end -->
 
-    <!-- JS here -->
+<!-- JS here -->
 
-    <script src="{% static 'webstore/assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
-    <!-- Jquery, Popper, Bootstrap -->
-    <script src="{% static 'webstore/assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
-    <script src="{% static 'webstore/assets/js/popper.min.js' %}"></script>
-    <script src="{% static 'webstore/assets/js/bootstrap.min.js' %}"></script>
-    <!-- Jquery Mobile Menu -->
-    <script src="{% static 'webstore/assets/js/jquery.slicknav.min.js' %}"></script>
+<script src="{% static 'webstore/assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+<!-- Jquery, Popper, Bootstrap -->
+<script src="{% static 'webstore/assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static 'webstore/assets/js/popper.min.js' %}"></script>
+<script src="{% static 'webstore/assets/js/bootstrap.min.js' %}"></script>
+<!-- Jquery Mobile Menu -->
+<script src="{% static 'webstore/assets/js/jquery.slicknav.min.js' %}"></script>
 
-    <!-- Jquery Slick , Owl-Carousel Plugins -->
-    <script src="{% static 'webstore/assets/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'webstore/assets/js/slick.min.js' %}"></script>
+<!-- Jquery Slick , Owl-Carousel Plugins -->
+<script src="{% static 'webstore/assets/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'webstore/assets/js/slick.min.js' %}"></script>
 
-    <!-- One Page, Animated-HeadLin -->
-    <script src="{% static 'webstore/assets/js/wow.min.js' %}"></script>
-    <script src="{% static 'webstore/assets/js/animated.headline.js' %}"></script>
-    <script src="{% static 'webstore/assets/js/jquery.magnific-popup.js' %}"></script>
+<!-- One Page, Animated-HeadLin -->
+<script src="{% static 'webstore/assets/js/wow.min.js' %}"></script>
+<script src="{% static 'webstore/assets/js/animated.headline.js' %}"></script>
+<script src="{% static 'webstore/assets/js/jquery.magnific-popup.js' %}"></script>
 
-    <!-- Scrollup, nice-select, sticky -->
-    <script src="{% static 'webstore/assets/js/jquery.scrollUp.min.js' %}"></script>
-    <script src="{% static 'webstore/assets/js/jquery.nice-select.min.js' %}"></script>
-    <script src="{% static 'webstore/assets/js/jquery.sticky.js' %}"></script>
+<!-- Scrollup, nice-select, sticky -->
+<script src="{% static 'webstore/assets/js/jquery.scrollUp.min.js' %}"></script>
+<script src="{% static 'webstore/assets/js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'webstore/assets/js/jquery.sticky.js' %}"></script>
 
-    <!-- contact js -->
-    <script src="{% static 'webstore/assets/js/contact.js' %}"></script>
-    <script src="{% static 'webstore/assets/js/jquery.form.js' %}"></script>
-    <script src="{% static 'webstore/assets/js/jquery.validate.min.js' %}"></script>
-    <script src="{% static 'webstore/assets/js/mail-script.js' %}"></script>
-    <script src="{% static 'webstore/assets/js/jquery.ajaxchimp.min.js' %}"></script>
+<!-- contact js -->
+<script src="{% static 'webstore/assets/js/contact.js' %}"></script>
+<script src="{% static 'webstore/assets/js/jquery.form.js' %}"></script>
+<script src="{% static 'webstore/assets/js/jquery.validate.min.js' %}"></script>
+<script src="{% static 'webstore/assets/js/mail-script.js' %}"></script>
+<script src="{% static 'webstore/assets/js/jquery.ajaxchimp.min.js' %}"></script>
 
-    <!-- Jquery Plugins, main Jquery -->
-    <script src="{% static 'webstore/assets/js/plugins.js' %}"></script>
-    <script src="{% static 'webstore/assets/js/main.js' %}"></script>
+<!-- Jquery Plugins, main Jquery -->
+<script src="{% static 'webstore/assets/js/plugins.js' %}"></script>
+<script src="{% static 'webstore/assets/js/main.js' %}"></script>
 
 </body>
 </html>

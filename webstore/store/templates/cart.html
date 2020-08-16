@@ -4,7 +4,11 @@
     | Cart
 {% endblock %}
 {% block content %}
-
+    <style>
+        img:hover {
+            box-shadow: 0 0 2px 1px rgba(255, 0, 0, 0.5);
+        }
+    </style>
   <main>
       <!-- Hero Area Start-->
       <div class="slider-area ">
@@ -35,19 +39,21 @@
                   </tr>
                 </thead>
                 <tbody>
+                {% for product in products %}
                   <tr>
+
                     <td>
                       <div class="media">
                         <div class="d-flex">
-                          <img src="assets/img/gallery/card1.png" alt="" />
+                          <a href="{% url 'product_details' product.id %}"> <img class="img-thumbnail" src="{{ product.img.url }}" width="50" height="50" alt="img"></a>
                         </div>
                         <div class="media-body">
-                          <p>Minimalistic shop for multipurpose use</p>
+                          <p>{{ product.name }}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <h5>$360.00</h5>
+                      <h5>{{ product.price | default_if_none:"--"}} EUR</h5>
                     </td>
                     <td>
                       <div class="product_count">
@@ -57,46 +63,11 @@
                       </div>
                     </td>
                     <td>
-                      <h5>$720.00</h5>
+                      <h5>{{product.price}}</h5>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <div class="media">
-                        <div class="d-flex">
-                          <img src="assets/img/gallery/card2.png" alt="" />
-                        </div>
-                        <div class="media-body">
-                          <p>Minimalistic shop for multipurpose use</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <h5>$360.00</h5>
-                    </td>
-                    <td>
-                      <div class="product_count">
-                          <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                          <input class="input-number" type="text" value="1" min="0" max="10">
-                          <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                      </div>
-                    </td>
-                    <td>
-                      <h5>$720.00</h5>
-                    </td>
-                  </tr>
-                  <tr class="bottom_button">
-                    <td>
-                      <a class="btn_1" href="#">Update Cart</a>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <div class="cupon_text float-right">
-                        <a class="btn_1" href="#">Close Coupon</a>
-                      </div>
-                    </td>
-                  </tr>
+                {% endfor %}
+
                   <tr>
                     <td></td>
                     <td></td>
@@ -104,10 +75,10 @@
                       <h5>Subtotal</h5>
                     </td>
                     <td>
-                      <h5>$2160.00</h5>
+                      <h5>{{total}} EUR</h5>
                     </td>
                   </tr>
-                  <tr class="shipping_area">
+{% comment %}                  <tr class="shipping_area">
                     <td></td>
                     <td></td>
                     <td>
@@ -151,16 +122,18 @@
                         <a class="btn_1" href="#">Update Details</a>
                       </div>
                     </td>
-                  </tr>
+                  </tr>{% endcomment %}
                 </tbody>
               </table>
               <div class="checkout_btn_inner float-right">
-                <a class="btn_1" href="#">Continue Shopping</a>
-                <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+                <a class="btn_1" href="{% url 'shop' %}">Continue Shopping</a>
+                <a class="btn_1 checkout_btn_1" href="{% url 'purchase' %}">Proceed to checkout</a>
               </div>
             </div>
           </div>
       </section>
+
+    </table>
       <!--================End Cart Area =================-->
-  </main>>
+  </main>
 {% endblock %}

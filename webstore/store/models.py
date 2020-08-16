@@ -90,7 +90,7 @@ class Cart(models.Model):
     user = models.ForeignKey(
         StoreUser, on_delete=models.DO_NOTHING)
     active = models.BooleanField(default=True) #kui sooritab ostu, siis peaks muutma active-i Falseks
-    product = models.ManyToManyField(Product)
+    products = models.ManyToManyField(Product)
 
     
 

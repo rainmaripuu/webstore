@@ -2,7 +2,7 @@
 from django.urls import path
 from . import views
 from .views import ProductDetailView, CartView, CreateProductView, ProductListView, UpdateProductView, DeleteProductView
-
+from .views import PurchaseSuccessView
 
 urlpatterns = [
     path('index.html', views.home_view, name='home'),
@@ -15,7 +15,11 @@ urlpatterns = [
     path('contact.html', views.contact_view, name='contact'),
     # path('login.html', views.login_view, name='login'),
     path('cart.html', CartView.as_view(), name='cart'),
+    path('add_to_cart/<int:product_id>', views.add_to_cart, name='add_to_cart'),
     path('checkout.html', views.checkout_view, name='checkout'),
     path('confirmation.html', views.confirmation_view, name='confirmation'),
     path('admin.html', views.admin_view, name='admin'),
+    path('signup.html', views.signup, name='signup'),
+    path('purchase/', views.purchase_view, name='purchase'),
+    path('purchase_success.html', PurchaseSuccessView.as_view(), name='purchase_success'),
 ]

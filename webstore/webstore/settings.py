@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store',
     'mptt',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,5 @@ STATICFILES_DIRS = [
 ]
 
 AUTH_USER_MODEL = 'store.StoreUser'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -3,7 +3,6 @@ from store.models import Product, Category, StoreUser, Cart
 from mptt.admin import MPTTModelAdmin
 from mptt.admin import DraggableMPTTAdmin
 
-
 # Register your models here.
 
 admin.site.register(Product)

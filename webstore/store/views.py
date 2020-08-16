@@ -1,9 +1,14 @@
-from django.shortcuts import render
-from .models import Product, Category, Cart
-from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
+from django.shortcuts import render, redirect
+from .models import Product, Category, Cart, StoreUser
+from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+#from django.contrib.auth import login, authenticate
+#from django.contrib.auth.forms import UserCreationForm
+from .forms import SignUpForm
+
 
 # Create your views here.
 
@@ -106,6 +111,21 @@ class DeleteProductView(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy('list')
 
 
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password')
+            new_user = StoreUser.objects.create_user(username=username, password=raw_password)
+            new_user.save()
+#            login(request, user)
+            return HttpResponseRedirect(reverse_lazy('login'))
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})
+
+
 def contact_view(request):
     return render(request, 'contact.html', {})
 
@@ -127,3 +147,40 @@ def checkout_view(request):
 
 def confirmation_view(request):
     return render(request, 'confirmation.html', {})
+
+
+def add_to_cart(request, product_id):
+    user = request.user
+    carts = Cart.objects.filter(user=user).filter(active=True)
+    user_cart = None
+    if carts.count() == 0:
+        new_cart = Cart.objects.create(user=user)
+        new_cart.save()
+        user_cart = new_cart
+    else:
+        user_cart = carts.first()
+
+    product = Product.objects.filter(id=product_id).first()
+
+    user_cart.products.add(product)
+
+    return HttpResponseRedirect(reverse_lazy('cart'))
+
+
+def purchase_view(request):
+    user = request.user
+    user_cart = Cart.objects.filter(user=user).filter(active=True).first()
+    user_products = user_cart.products.all()
+
+    for product in user_products:
+        product.quantity = product.quantity -1
+        product.save()
+
+    user_cart.active = False
+    user_cart.save()
+
+    return HttpResponseRedirect(reverse_lazy('purchase_success'))
+
+
+class PurchaseSuccessView(TemplateView):
+    template_name = 'purchase_success.html'
