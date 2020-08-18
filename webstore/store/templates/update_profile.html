@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    | {{ user.get_username }} Update Contact
+{% endblock %}
+{% block content %}
+    <div class="row justify-content-center">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn hero-btn" value="Update profile">
+        </form>
+    </div>
+
+{% endblock %}

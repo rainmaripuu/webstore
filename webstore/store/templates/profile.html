@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    | {{ user.get_username }}
+{% endblock %}
+{% block content %}
+        <main>
+        <!-- Hero Area Start-->
+        <div class="slider-area ">
+            <div class="single-slider slider-height2 d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="hero-cap text-center">
+                                <h2>{{ user.username }} Contact Data</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hero Area End-->
+{#        <div class="product_image_area">#}
+            <div class="container">
+            <div class="row justify-content-center">
+
+                <div class="col-lg-8">
+                <div class="single_product_text text-center">
+
+                    <p>
+                        <ul>
+                        <li><h3>First Name: {{ user.first_name | default:"please update"}}</h3></li>
+                        <li><h3>Last Name: {{ user.last_name | default:"please update"}}</h3></li>
+                        <li><h3>Email: {{ user.email | default:"please update"}}</h3></li>
+                        <li><h3>Country: {{ user.country | default:"please update"}}</h3></li>
+                        <li><h3>City: {{ user.city | default:"please update"}}</h3></li>
+                        <li><h3>County: {{ user.county | default:"please update"}}</h3></li>
+                        <li><h3>Street: {{ user.street | default:"please update"}}</h3></li>
+                        <li><h3>Preferred Communication: {{ user.preferred_communication | default_if_none:"please update"}}</h3></li>
+                        </ul>
+                    </p>
+                    <div class="card_area">
+
+                    <div class="add_to_cart">
+                        <a href="{% url 'update_profile' %}" class="btn_3">Update Profile</a>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+
+        </div>
+        </main>
+{% endblock %}

@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from .forms import SignUpForm
+from .forms import SignUpForm, UpdateUserForm
 
 
 # Create your views here.
@@ -125,6 +125,27 @@ def signup(request):
 
 def contact_view(request):
     return render(request, 'contact.html', {})
+
+
+def profile_view(request):
+    return render(request, 'profile.html', {'user': request.user})
+
+
+def update_profile_view(request):
+    user = request.user
+    if request.method == 'POST':
+        form = UpdateUserForm(data=request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UpdateUserForm(instance=user)
+    return render(request, 'update_profile.html', {'form': form})
+
+# class ProfileView(DetailView):
+#     model = StoreUser
+#     template_name = 'profile.html'
+#     context_object_name = 'user'
 
 
 @login_required

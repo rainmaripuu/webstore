@@ -77,7 +77,7 @@
                                     {% if user.is_authenticated %}
                                         <li><a href="#"> {{ user.get_username }} </a>
                                             <ul class="submenu">
-                                                <li><a href="#" > profile </a></li>
+                                                <li><a href="{% url 'profile'  %}" > profile </a></li>
                                                 <li><a href="{% url 'logout' %}?next={% url 'home' %}" > logout </a></li>
                                             </ul>
                                         <li><a href="{% url 'cart' %}"><span class="flaticon-shopping-cart"></span></a> </li>

@@ -24,3 +24,9 @@ class SignUpForm(forms.Form):
             raise forms.ValidationError(
                 "This username is already taken. Choose another one"
             )
+
+
+class UpdateUserForm(forms.ModelForm):
+    class Meta:
+        model = StoreUser
+        fields = ('first_name', 'last_name', 'email', 'country', 'city', 'county', 'street', 'preferred_communication')
