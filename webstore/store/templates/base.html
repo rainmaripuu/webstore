@@ -54,7 +54,8 @@
                                 <li><a href="{% url 'home' %}">Home</a></li>
                                 <li><a href="{% url 'shop' %}">Shop</a></li>
                                 <li><a href="{% url 'contact' %}">Contact</a></li>
-                                {% if user.is_authenticated %}
+{#                                {% if user.is_authenticated %}#}
+                                {% if request.user.is_active and request.user.is_staff %}
                                     <li><a href="{% url 'admin' %}">Admin</a>
                                     <ul class="submenu">
                                         <li><a href="list.html"> Product list</a></li>

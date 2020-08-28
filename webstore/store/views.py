@@ -3,7 +3,7 @@ from .models import Product, Category, Cart, StoreUser
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.http import HttpResponseRedirect
 from .forms import SignUpForm, UpdateUserForm
 
@@ -123,14 +123,17 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
+
 def contact_view(request):
     return render(request, 'contact.html', {})
 
 
+@login_required
 def profile_view(request):
     return render(request, 'profile.html', {'user': request.user})
 
 
+@login_required
 def update_profile_view(request):
     user = request.user
     if request.method == 'POST':
@@ -163,6 +166,7 @@ def confirmation_view(request):
     return render(request, 'confirmation.html', {})
 
 
+@login_required
 def add_to_cart(request, product_id):
     user = request.user
     carts = Cart.objects.filter(user=user).filter(active=True)
@@ -181,6 +185,7 @@ def add_to_cart(request, product_id):
     return HttpResponseRedirect(reverse_lazy('cart'))
 
 
+@login_required
 def purchase_view(request):
     user = request.user
     user_cart = Cart.objects.filter(user=user).filter(active=True).first()
